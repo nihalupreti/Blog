@@ -6,8 +6,8 @@ def index(request):
 
 
 def posts(request):
-    pass
+    return render(request, "blog/single-post.html")
 
 
-def individual_post(request):
+def individual_post(request, slug):
     pass

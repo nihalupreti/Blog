@@ -1,9 +1,29 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}
-  My Blog
- {% endblock %} 
+{% block title %} 
+ My Blog
+{% endblock %}
 
-{% block content %}
-<h1>Welcome to my blog</h1>
+{% block css_file %}
+<link rel="stylesheet" href="{% static "blog/main.css" %}">
+{% endblock %}  
+  
+ {% block content %}
+
+<div class="container">
+  <article class="post">
+    <a href="">
+      <h2>First Blog Post</h2>
+      <img src="{% static "blog/images/health.jpg" %}" alt="Image 1" />
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus est
+        ut ullamcorper placerat. Fusce interdum augue a ipsum iaculis, id euismod
+        arcu commodo.
+      </p>
+      <p class="date">Posted on May 1, 2023</p>
+    </a>
+  </article>
+</div>
+
 {% endblock %}

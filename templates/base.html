@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,9 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
+   <link rel="stylesheet" href="{% static "style.css" %}">
     {% block css_file %}{% endblock %}
   </head>
   <body>
+    <header>
+      <h1>My Blog</h1>
+      <p>Welcome to my blog</p>
+    </header>
     {% block content %}{% endblock %}
   </body>
 </html>

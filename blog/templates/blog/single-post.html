@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} 
+ My Blog
+{% endblock %}
+
+{% block css_file %}
+<link rel="stylesheet" href="{% static "blog/single-post.css" %}">
+{% endblock %}  
+
+{% block content %}
+<div class="post-content">
+    <h2>Blog Post Title</h2>
+    <img src="{% static "blog/images/hiking.jpg" %}" alt="Blog Post Image">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tempor finibus sapien, nec fermentum lorem interdum eu. Sed vel ipsum quis enim iaculis tincidunt. In hac habitasse platea dictumst. Sed quis orci elementum, cursus orci vitae, dapibus enim. Cras tristique tristique libero eu pulvinar. Curabitur consequat venenatis ex sed tempor. Phasellus in justo est. Donec vitae elementum risus.</p>
+    <p>Nulla aliquet pharetra augue, id finibus enim cursus eget. Sed vitae purus quis nisi finibus facilisis id sed nibh. Vestibulum sollicitudin fringilla ligula, nec sollicitudin risus. Morbi facilisis gravida facilisis. Sed interdum, libero vel consequat consequat, mauris tortor laoreet nunc, sed vulputate metus mauris ac nunc. Proin non felis tincidunt, luctus risus eget, commodo felis. Morbi bibendum sagittis quam, ac elementum nunc facilisis at. Etiam in dictum orci, eu volutpat lacus. Phasellus non mi risus.</p>
+    <p class="author">Written by John Doe</p>
+    <p class="date">Published on June 1, 2023</p>
+  </div>
+{% endblock %}
