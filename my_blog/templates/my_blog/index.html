@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block page_title %} 
+My Blog 
+{% endblock %} 
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "my_blog/index.css" %}" />
+{% endblock %}
+
+{% block content %}
+<header id="main-navigation">
+  <h1><a href="">Nihal' Blog</a></h1>
+  <nav>
+    <a href="">All Posts</a>
+  </nav>
+</header>
+
+<section id="welcome">
+  <header>
+    <img src="{% static "my_blog/images/itachi.jpg" %}" alt="Itachi Image" />
+    <h2>Nihal'S BLOG</h2>
+  </header>
+  <p>Hi, I am Nihal and I love to Programming</p>
+</section>
+
+<section id="latest-posts">
+  <h2>My Latest Views</h2>
+
+  <ul>
+    <li>
+      <article class="post">
+        <a href="">
+          <img src="{% static "my_blog/images/penguine.jpg" %}" alt="linux" />
+          <div class="post__content">
+            <h3>GNU/Linux</h3>
+            <p>
+              Linux® is an open source operating system (OS). 
+              An operating system is the software that directly manages a system's 
+              hardware and resources, like CPU, memory, and storage
+            </p>
+          </div>
+        </a>
+      </article>
+    </li>
+  </ul>
+</section>
+
+<section id="about">
+  <h2>What I Do</h2>
+  <p>
+    I love programming, Linux and Pentesting!
+  </p>
+  <p>
+    My goal is to keep on growing as a Programmer and learn something new everyday.
+  </p>
+</section>
+{% endblock %}
