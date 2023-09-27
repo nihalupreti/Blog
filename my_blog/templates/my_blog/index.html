@@ -13,7 +13,7 @@ My Blog
 <header id="main-navigation">
   <h1><a href="">Nihal' Blog</a></h1>
   <nav>
-    <a href="">All Posts</a>
+    <a href={% url "all-post-page" %}>All Posts</a>
   </nav>
 </header>
 
@@ -27,23 +27,10 @@ My Blog
 
 <section id="latest-posts">
   <h2>My Latest Views</h2>
-
   <ul>
-    <li>
-      <article class="post">
-        <a href="">
-          <img src="{% static "my_blog/images/penguine.jpg" %}" alt="linux" />
-          <div class="post__content">
-            <h3>GNU/Linux</h3>
-            <p>
-              Linux® is an open source operating system (OS). 
-              An operating system is the software that directly manages a system's 
-              hardware and resources, like CPU, memory, and storage
-            </p>
-          </div>
-        </a>
-      </article>
-    </li>
+    {% for post in posts %}
+      {% include "my_blog/includes/post.html" %}
+    {% endfor %}
   </ul>
 </section>
 
