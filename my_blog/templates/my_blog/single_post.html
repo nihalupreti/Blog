@@ -3,5 +3,8 @@
 {% block page_title %}{% endblock  %}
 
 {% block content %}
+    {% for tag in tags %}
+        <a href="">{{ tag }}</a>    
+    {% endfor %}
     <p>{{ post_detail.content }}</p>
 {% endblock %}

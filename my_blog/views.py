@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Tag
 
 
 def starting_page(request):
@@ -12,13 +12,24 @@ def starting_page(request):
 
 def single_post(request, slug):
     post = Post.objects.get(id=slug)
+    tag = list(post.tag.all().values_list("caption", flat=True))
     return render(request, "my_blog/single_post.html", {
-        "post_detail": post
+        "post_detail": post,
+        "tags": tag
     })
 
 
-def all_posts(request):
-    entire_posts = Post.objects.all()
-    return render(request, "my_blog/all_posts.html", {
-        "posts": entire_posts
-    })
+def all_posts(request, tags):
+    all_tags = Tag.objects.all()
+    if (tags != "all"):
+        post_by_tags = Post.objects.filter(tag__caption=tags)
+        return render(request, "my_blog/all_posts.html", {
+            "posts": post_by_tags,
+            "tags": all_tags,
+        })
+    else:
+        entire_posts = Post.objects.all()
+        return render(request, "my_blog/all_posts.html", {
+            "posts": entire_posts,
+            "tags": all_tags,
+        })

@@ -10,7 +10,9 @@ My Blog
 {% endblock %}
 
 {% block content %}
-
+    {% for tag in tags %}
+        <a href="{% url "all-post-page" tags=tag %}">{{ tag }}</a>
+    {% endfor %} 
     {% for post in posts %}
         {% include "my_blog/includes/post.html" %}
     {% endfor %}
