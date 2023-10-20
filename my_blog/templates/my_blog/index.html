@@ -6,41 +6,124 @@ My Blog
 {% endblock %} 
 
 {% block css_files %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static "my_blog/bootstrap.min.css" %}"/>
   <link rel="stylesheet" href="{% static "my_blog/index.css" %}" />
 {% endblock %}
 
 {% block content %}
-<header id="main-navigation">
-  <h1><a href="">Nihal' Blog</a></h1>
-  <nav>
-    <a href={% url "all-post-page" tags="all" %}>All Posts</a>
-  </nav>
-</header>
+  <body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
 
-<section id="welcome">
-  <header>
-    <img src="{% static "my_blog/images/itachi.jpg" %}" alt="Itachi Image" />
-    <h2>Nihal'S BLOG</h2>
-  </header>
-  <p>Hi, I am Nihal and I love to Programming</p>
-</section>
+    <!-- Header -->
+      <header id="header">
+        <h1><a href="">Text Realm</a></h1>
+        <nav class="links">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">All Posts</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">References</a></li>
+          </ul>
+        </nav>
+      </header>
 
-<section id="latest-posts">
-  <h2>My Latest Views</h2>
-  <ul>
-    {% for post in posts %}
-      {% include "my_blog/includes/post.html" %}
-    {% endfor %}
-  </ul>
-</section>
+      <!-- Main -->
+      <div id="main">
 
-<section id="about">
-  <h2>What I Do</h2>
-  <p>
-    I love programming, Linux and Pentesting!
-  </p>
-  <p>
-    My goal is to keep on growing as a Programmer and learn something new everyday.
-  </p>
-</section>
+        <!-- Post -->
+       
+
+        <div class="section-latest">
+          <div class="container">
+            <div class="row gutter-v1 align-items-stretch mb-5">
+              <div class="col-12">
+                <h2 class="section-title">Latest</h2>
+              </div>
+              <div class="col-md-9 pr-md-5">
+                <div class="row">
+                    {% for post in posts %}
+                      <div class="col-12">
+                        <div class="post-entry horizontal d-md-flex">
+                          <div class="media">
+                            <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="Image" class="img-fluid"></a>
+                          </div>
+                          <div class="text">
+                            {% for genre in post.genre.all %}
+                              <div class="meta-cat"><a href="#">{{genre.genre}}</a></div>
+                            {% endfor %}
+                            <h2><a href="#">{{ post.title }}</a></h2>
+                            <div class="meta mb-0">
+                              <span>{{post.date}}</span>
+                            </div>
+                            <p>{{ post.excerpt }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- Pagination -->
+          {% comment %} <ul class="actions pagination">
+            <li><a href="" class="disabled button large previous">Previous Page</a></li>
+            <li><a href="#" class="button large next">Next Page</a></li>
+          </ul> {% endcomment %}
+      </div>
+      <div style="border-left: 1px solid grey;
+      height: 300px; padding: 10px"></div>
+
+    <!-- Sidebar -->
+      <section id="sidebar">
+        <!-- Posts List -->
+          <section>
+            <ul class="posts">
+              {% for post in posts %}
+                <li>
+                  <article>
+                    <header>
+                      <h3><a href="">{{ post.title }}</a></h3>
+                      <time class="published" datetime="2015-10-20">{{ post.date }}</time>
+                    </header>
+                    <a href="" class="image"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="" /></a>
+                  </article>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+
+        <!-- About -->
+          <section class="blurb">
+            <h2>About</h2>
+            <p>Undergrad student | programmer | Learner | Body Builder</p>
+            <ul class="actions">
+              <li><a href="#" class="button">Learn More</a></li>
+            </ul>
+          </section>
+
+        <!-- Footer -->
+          <section id="footer">
+            <ul class="icons">
+              <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+              <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+              <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+              <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+          </section>
+
+      </section>
+
+  </div>
+
+
+  <script src="{% static "my_blog/js/jquery.min.js" %}"></script>
+  <script src="{% static "my_blog/js/browser.min.js" %}"></script>
+  <script src="{% static "my_blog/js/breakpoints.min.js" %}"></script>
+  <script src="{% static "my_blog/js/util.js" %}"></script>
+  <script src="{% static "my_blog/js/main.js" %}"></script>
+
 {% endblock %}

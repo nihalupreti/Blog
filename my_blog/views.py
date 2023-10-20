@@ -4,7 +4,7 @@ from .models import Post, Tag
 
 def starting_page(request):
     # fetches only 3 latest article on the basic of date.
-    lastest_posts = Post.objects.all().order_by("-date")[:3]
+    lastest_posts = Post.objects.all().order_by("-date")
     return render(request, "my_blog/index.html", {
         "posts": lastest_posts
     })
