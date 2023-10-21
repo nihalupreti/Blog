@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Post, Tag
 
+import misaka
+
 
 def starting_page(request):
     # fetches only 3 latest article on the basic of date.
@@ -12,10 +14,13 @@ def starting_page(request):
 
 def single_post(request, slug):
     post = Post.objects.get(id=slug)
+    all_posts = Post.objects.all().order_by("-date")
+    post.content = misaka.html(post.content)
     tag = list(post.tag.all().values_list("caption", flat=True))
     return render(request, "my_blog/single_post.html", {
         "post_detail": post,
-        "tags": tag
+        "tags": tag,
+        "all_posts": all_posts
     })
 
 

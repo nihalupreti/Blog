@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block page_title %} 
-My Blog 
+  Text Realm
 {% endblock %} 
 
 {% block css_files %}
@@ -16,26 +16,10 @@ My Blog
   <body class="is-preload">
   <!-- Wrapper -->
   <div id="wrapper">
-
-    <!-- Header -->
-      <header id="header">
-        <h1><a href="">Text Realm</a></h1>
-        <nav class="links">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">All Posts</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">References</a></li>
-          </ul>
-        </nav>
-      </header>
-
       <!-- Main -->
       <div id="main">
-
         <!-- Post -->
-       
-
+      
         <div class="section-latest">
           <div class="container">
             <div class="row gutter-v1 align-items-stretch mb-5">
@@ -51,12 +35,30 @@ My Blog
                             <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="Image" class="img-fluid"></a>
                           </div>
                           <div class="text">
-                            {% for genre in post.genre.all %}
-                              <div class="meta-cat"><a href="#">{{genre.genre}}</a></div>
-                            {% endfor %}
-                            <h2><a href="#">{{ post.title }}</a></h2>
+                            <div class="header-portion">
+                              <div class="author d-flex align-items-center">
+                                <div class="img mr-3">
+                                  <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.author.img }}" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="text">
+                                  <h3><a href="#">{{ post.author }}</a></h3>
+                                </div>
+                              </div>
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="ph">
+                                <path
+                                  d="M17.5 1.25a.5.5 0 0 1 1 0v2.5H21a.5.5 0 0 1 0 1h-2.5v2.5a.5.5 0 0 1-1 0v-2.5H15a.5.5 0 0 1 0-1h2.5v-2.5zm-11 4.5a1 1 0 0 1 1-1H11a.5.5 0 0 0 0-1H7.5a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V5.75z">
+                                </path>
+                                </path>
+                              </svg>
+                            </div>
+                            <h2><a href="{% url "individual-post-page" slug=post.id %}">{{ post.title }}</a></h2>
                             <div class="meta mb-0">
-                              <span>{{post.date}}</span>
+                              <span>{{ post.date }}</span>
+                              <span>&bullet;</span>
+                              {% for genre in post.genre.all %}
+                                {% comment %} <div class="meta-cat"><a href="#">{{genre.genre}}</a></div> {% endcomment %}
+                                <span>{{ genre.genre}}</span>
+                              {% endfor %}
                             </div>
                             <p>{{ post.excerpt }}</p>
                           </div>
@@ -114,16 +116,7 @@ My Blog
               <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
             </ul>
           </section>
-
       </section>
-
   </div>
-
-
-  <script src="{% static "my_blog/js/jquery.min.js" %}"></script>
-  <script src="{% static "my_blog/js/browser.min.js" %}"></script>
-  <script src="{% static "my_blog/js/breakpoints.min.js" %}"></script>
-  <script src="{% static "my_blog/js/util.js" %}"></script>
-  <script src="{% static "my_blog/js/main.js" %}"></script>
-
+  
 {% endblock %}

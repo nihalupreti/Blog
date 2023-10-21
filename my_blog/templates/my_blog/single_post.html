@@ -1,10 +1,44 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block page_title %}{% endblock  %}
-
+{% block page_title %}Single post{% endblock  %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "my_blog/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "my_blog/single_post.css" %}">
+{% endblock %}
 {% block content %}
-    {% for tag in tags %}
-        <a href="">{{ tag }}</a>    
-    {% endfor %}
-    <p>{{ post_detail.content }}</p>
+    <div class="featured-post single-article">
+        <div class="container">
+        <div class="post-slide single-page" style="background-image: url({% static 'my_blog/images/' %}{{ post_detail.img_name }});">
+            <div class="text-wrap pb-5">
+                <h2 class="text-black">{{ post_detail.title }}</h2>
+                <div class="meta">
+                    <span>{{ post_detail.date }}</span>
+                    <span>&bullet;</span>
+                    {% for genre in post_detail.genre.all %}
+                        <span>{{ genre.genre}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="container article">
+        <div class="row justify-content-center align-items-stretch">
+            <article class="col-lg-8 order-lg-2 px-lg-5">
+                <div>{{ post_detail.content|safe }}</div>
+            </article>
+            
+            {% comment %} <div class="col-lg-3 mb-5 mb-lg-0 order-lg-3">
+                <div class="share floating-block sticky-top">
+                    <h2 class="mb-3 text-black">Subscribe to Newsletter</h2>
+                    <p>Keep yourself Motiviated with Daily stoic quotes.</p>
+                    <form action="#">
+                        <input type="email" class="form-control mb-2" placeholder="Enter email">
+                        <input type="submit" value="Subscribe" class="btn btn-primary btn-block">
+                    </form>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </div>
 {% endblock %}

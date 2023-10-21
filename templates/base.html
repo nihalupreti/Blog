@@ -10,6 +10,17 @@
   {% block css_files %}{% endblock %}
 </head>
 <body>
+  <header id="header">
+    {% comment %} <h1><a href="">Text Realm</a></h1> {% endcomment %}
+    <nav class="links">
+      <ul>
+        <li><a href="{% url "main-page" %}">Home</a></li>
+        <li><a href="#">Favourites</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">References</a></li>
+      </ul>
+    </nav>
+  </header>
   {% block content %}
   {% endblock %}
 </body>
