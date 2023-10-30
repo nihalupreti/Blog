@@ -1,15 +1,11 @@
 {% load static %}
 
 <li>
-    <article class="post">
-      <a href="{% url "individual-post-page" slug=post.id %}">
-        <img src="{% static "my_blog/images/penguine.jpg" %}" alt="linux-tux" />
-        <div class="post__content">
-          <h3>{{ post.title }}</h3>
-          <p>
-            {{ post.excerpt }}
-          </p>
-        </div>
-      </a>
-    </article>
-  </li>
+  <article>
+    <header>
+      <h3><a href="">{{ post.title }}</a></h3>
+      <time class="published" datetime={{ post.date }}>{{ post.date }}</time>
+    </header>
+    <a href="" class="image"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="" /></a>
+  </article>
+</li>

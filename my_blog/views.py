@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpResponse
 from .models import Post, Tag
 
 import misaka
@@ -38,3 +40,28 @@ def all_posts(request, tags):
             "posts": entire_posts,
             "tags": all_tags,
         })
+
+
+def favourite_posts(request):
+    # Retrieve all the bookmarked post IDs from the session
+    bookmarked_ids = request.session.get("bookmarked", [])
+
+    # Retrieve all posts corresponding to the bookmarked IDs
+    posts = Post.objects.filter(id__in=bookmarked_ids)
+
+    return render(request, "my_blog/favourites.html", {
+        "posts": posts
+    })
+
+
+@csrf_exempt
+def bookmark_page(request):
+    if (request.method) == "POST":
+        request.session["bookmarked"] = []
+        request.session["bookmarked"].append(request.POST.get('postId'))
+        response_body = {
+            "status": "success"
+        }
+        return JsonResponse(response_body)
+    else:
+        return HttpResponse("Method not allowed", status=405)

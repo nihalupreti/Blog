@@ -1,25 +1,25 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 
-{% block page_title %} 
+{% block page_title %}
   Text Realm
-{% endblock %} 
+{% endblock %}
 
 {% block css_files %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static "my_blog/bootstrap.min.css" %}"/>
   <link rel="stylesheet" href="{% static "my_blog/index.css" %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {% endblock %}
 
 {% block content %}
   <body class="is-preload">
   <!-- Wrapper -->
-  <div id="wrapper">
+    <div id="wrapper">
       <!-- Main -->
       <div id="main">
         <!-- Post -->
-      
         <div class="section-latest">
           <div class="container">
             <div class="row gutter-v1 align-items-stretch mb-5">
@@ -28,95 +28,82 @@
               </div>
               <div class="col-md-9 pr-md-5">
                 <div class="row">
-                    {% for post in posts %}
-                      <div class="col-12">
-                        <div class="post-entry horizontal d-md-flex">
-                          <div class="media">
-                            <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="Image" class="img-fluid"></a>
-                          </div>
-                          <div class="text">
-                            <div class="header-portion">
-                              <div class="author d-flex align-items-center">
-                                <div class="img mr-3">
-                                  <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.author.img }}" alt="Image" class="img-fluid"></a>
-                                </div>
-                                <div class="text">
-                                  <h3><a href="#">{{ post.author }}</a></h3>
-                                </div>
-                              </div>
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="ph">
-                                <path
-                                  d="M17.5 1.25a.5.5 0 0 1 1 0v2.5H21a.5.5 0 0 1 0 1h-2.5v2.5a.5.5 0 0 1-1 0v-2.5H15a.5.5 0 0 1 0-1h2.5v-2.5zm-11 4.5a1 1 0 0 1 1-1H11a.5.5 0 0 0 0-1H7.5a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V5.75z">
-                                </path>
-                                </path>
-                              </svg>
-                            </div>
-                            <h2><a href="{% url "individual-post-page" slug=post.id %}">{{ post.title }}</a></h2>
-                            <div class="meta mb-0">
-                              <span>{{ post.date }}</span>
-                              <span>&bullet;</span>
-                              {% for genre in post.genre.all %}
-                                {% comment %} <div class="meta-cat"><a href="#">{{genre.genre}}</a></div> {% endcomment %}
-                                <span>{{ genre.genre}}</span>
-                              {% endfor %}
-                            </div>
-                            <p>{{ post.excerpt }}</p>
-                          </div>
+                  {% for post in posts %}
+                    <div class="col-12">
+                      <div class="post-entry horizontal d-md-flex">
+                        <div class="media">
+                          <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="Image" class="img-fluid"></a>
                         </div>
+                        <div class="text">
+                          <div class="header-portion">
+                            <div class="author d-flex align-items-center">
+                              <div class="img mr-3">
+                                <a href="#"><img src="{% static 'my_blog/images/' %}{{ post.author.img }}" alt="Image" class="img-fluid"></a>
+                              </div>
+                              <div class="text">
+                                <h3><a href="#">{{ post.author }}</a></h3>
+                              </div>
+                            </div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="ph" data-post-id="{{ post.id }}"">
+                              <path
+                                d="M17.5 1.25a.5.5 0 0 1 1 0v2.5H21a.5.5 0 0 1 0 1h-2.5v2.5a.5.5 0 0 1-1 0v-2.5H15a.5.5 0 0 1 0-1h2.5v-2.5zm-11 4.5a1 1 0 0 1 1-1H11a.5.5 0 0 0 0-1H7.5a2 2 0 0 0-2 2v14a.5.5 0 0 0 .8.4l5.7-4.4 5.7 4.4a.5.5 0 0 0 .8-.4v-8.5a.5.5 0 0 0-1 0v7.48l-5.2-4a.5.5 0 0 0-.6 0l-5.2 4V5.75z">
+                              </path>
+                            </svg>
+                        </div>
+                        <h2><a href="{% url "individual-post-page" slug=post.id %}">{{ post.title }}</a></h2>
+                        <div class="meta mb-0">
+                          <span>{{ post.date }}</span>
+                          <span>&bullet;</span>
+                          {% for genre in post.genre.all %}
+                                {% comment %} <div class="meta-cat"><a href="#">{{genre.genre}}</a></div> {% endcomment %}
+                            <span>{{ genre.genre}}</span>
+                          {% endfor %}
+                        </div>
+                        <p>{{ post.excerpt }}</p>
                       </div>
-                    {% endfor %}
                     </div>
-                  </div>
+                    </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>
-        <!-- Pagination -->
-          {% comment %} <ul class="actions pagination">
-            <li><a href="" class="disabled button large previous">Previous Page</a></li>
-            <li><a href="#" class="button large next">Next Page</a></li>
-          </ul> {% endcomment %}
+          </div>
+        </div>
       </div>
       <div style="border-left: 1px solid grey;
-      height: 300px; padding: 10px"></div>
+                  height: 300px; padding: 10px"></div>
 
     <!-- Sidebar -->
       <section id="sidebar">
         <!-- Posts List -->
-          <section>
-            <ul class="posts">
-              {% for post in posts %}
-                <li>
-                  <article>
-                    <header>
-                      <h3><a href="">{{ post.title }}</a></h3>
-                      <time class="published" datetime="2015-10-20">{{ post.date }}</time>
-                    </header>
-                    <a href="" class="image"><img src="{% static 'my_blog/images/' %}{{ post.img_name }}" alt="" /></a>
-                  </article>
-                </li>
-              {% endfor %}
-            </ul>
-          </section>
+        <section>
+          <ul class="posts">
+            {% for post in posts %}
+              {% include "my_blog/includes/post.html" with post=post %}
+            {% endfor %}
+          </ul>
+        </section>
 
         <!-- About -->
-          <section class="blurb">
-            <h2>About</h2>
-            <p>Undergrad student | programmer | Learner | Body Builder</p>
-            <ul class="actions">
-              <li><a href="#" class="button">Learn More</a></li>
-            </ul>
-          </section>
+        <section class="blurb">
+          <h2>About</h2>
+          <p>Undergrad student | programmer | Learner | Body Builder</p>
+          <ul class="actions">
+            <li><a href="#" class="button">Learn More</a></li>
+          </ul>
+        </section>
 
         <!-- Footer -->
-          <section id="footer">
-            <ul class="icons">
-              <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-              <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-              <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-              <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
-          </section>
+        <section id="footer">
+          <ul class="icons">
+            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+        </section>
       </section>
-  </div>
-  
+    </div>
+    <script src="{% static "my_blog/js/script.js" %}"></script>
+
 {% endblock %}

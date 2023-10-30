@@ -684,3 +684,7 @@ svg {
 .ph:hover path {
   stroke: #333;
 }
+
+.lc {
+  fill: grey;
+}

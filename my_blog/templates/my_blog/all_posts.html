@@ -1,18 +1,18 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 
-{% block page_title %} 
-My Blog 
-{% endblock %} 
+{% block page_title %}
+    My Blog
+{% endblock %}
 
 {% block css_files %}
-  <link rel="stylesheet" href="{% static "my_blog/index.css" %}" />
+    <link rel="stylesheet" href="{% static "my_blog/index.css" %}" />
 {% endblock %}
 
 {% block content %}
     {% for tag in tags %}
         <a href="{% url "all-post-page" tags=tag %}">{{ tag }}</a>
-    {% endfor %} 
+    {% endfor %}
     {% for post in posts %}
         {% include "my_blog/includes/post.html" %}
     {% endfor %}
