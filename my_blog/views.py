@@ -9,8 +9,11 @@ import misaka
 def starting_page(request):
     # fetches only 3 latest article on the basic of date.
     lastest_posts = Post.objects.all().order_by("-date")
+    print(list(
+        map(int, request.POST.getlist('bookmarkedPosts[]'))))
     return render(request, "my_blog/index.html", {
-        "posts": lastest_posts
+        "posts": lastest_posts,
+        "bookmark_status": request.session.get("bookmarked", [])
     })
 
 
@@ -56,11 +59,18 @@ def favourite_posts(request):
 
 @csrf_exempt
 def bookmark_page(request):
-    if (request.method) == "POST":
-        request.session["bookmarked"] = []
-        request.session["bookmarked"].append(request.POST.get('postId'))
+    if request.method == "POST":
+        if "bookmarked" not in request.session:
+            request.session["bookmarked"] = []
+
+        bookmarked_posts = list(
+            map(int, request.POST.getlist('bookmarkedPosts[]')))
+        # print(bookmarked_posts)
+        request.session["bookmarked"].extend(bookmarked_posts)
+        request.session.save()
         response_body = {
-            "status": "success"
+            "status": "success",
+            "bookmarked_posts": request.session["bookmarked"]
         }
         return JsonResponse(response_body)
     else:
